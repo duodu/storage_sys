@@ -1,4 +1,16 @@
 StorageSys::Application.routes.draw do
+  resources :competences
+
+
+  resources :users
+
+
+  resources :statuses
+
+
+  resources :cagos
+
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

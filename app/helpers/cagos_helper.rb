@@ -1,0 +1,2 @@
+module CagosHelper
+end

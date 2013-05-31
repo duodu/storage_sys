@@ -1,0 +1,25 @@
+<%= form_for(@cago) do |f| %>
+  <% if @cago.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@cago.errors.count, "error") %> prohibited this cago from being saved:</h2>
+
+      <ul>
+      <% @cago.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :status_id %><br />
+    <%= f.select :status_id, options_for_select(@status_array) %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

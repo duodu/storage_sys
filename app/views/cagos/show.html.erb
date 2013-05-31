@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @cago.name %>
+</p>
+
+<p>
+  <b>Status:</b>
+  <%= @cago.status.name %>
+</p>
+
+
+<%= link_to 'Edit', edit_cago_path(@cago) %> |
+<%= link_to 'Back', cagos_path %>
