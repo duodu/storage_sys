@@ -3,10 +3,13 @@ class CompetencesController < ApplicationController
   # GET /competences.json
   def index
     @competences = Competence.all
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @competences }
+    if @competences.empty?
+      redirect_to :action => "new"
+    else
+      respond_to do |format|
+        format.html # index.html.erb
+        format.json { render json: @competences }
+      end
     end
   end
 
@@ -25,6 +28,7 @@ class CompetencesController < ApplicationController
   # GET /competences/new.json
   def new
     @competence = Competence.new
+    @status_array = Status.all.map { |s| [s.name, s.id] }
 
     respond_to do |format|
       format.html # new.html.erb
@@ -35,15 +39,20 @@ class CompetencesController < ApplicationController
   # GET /competences/1/edit
   def edit
     @competence = Competence.find(params[:id])
+    @status_array = Status.all.map { |s| [s.name, s.id] }
   end
 
   # POST /competences
   # POST /competences.json
   def create
     @competence = Competence.new(params[:competence])
+    @status_array = Status.all.map { |s| [s.name, s.id] }
+    if @competence.ostatus_id == @competence.nstatus_id
+      @competence.errors.add :name, "can not have same status."
+    end
 
     respond_to do |format|
-      if @competence.save
+      if @competence.ostatus_id != @competence.nstatus_id && @competence.save
         format.html { redirect_to @competence, notice: 'Competence was successfully created.' }
         format.json { render json: @competence, status: :created, location: @competence }
       else
@@ -51,6 +60,7 @@ class CompetencesController < ApplicationController
         format.json { render json: @competence.errors, status: :unprocessable_entity }
       end
     end
+
   end
 
   # PUT /competences/1

@@ -2,8 +2,12 @@ class CagosController < ApplicationController
   # GET /cagos
   # GET /cagos.json
   def index
-    @cagos = Cago.all
-
+    if session[:user_id]
+      @user = User.find(session[:user_id])
+      @cagos = Cago.where("status_id=?",@user.competence.ostatus_id)
+    else
+      @cagos = Cago.all
+    end
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @cagos }
@@ -35,8 +39,14 @@ class CagosController < ApplicationController
 
   # GET /cagos/1/edit
   def edit
-    @cago = Cago.find(params[:id])
-    @status_array = Status.all.map { |s| [s.name, s.id] }
+    if session[:user_id]
+      @user = User.find(session[:user_id])
+      @cago = Cago.find(params[:id])
+      @status_array = Status.where("id=? or id=?",@user.competence.ostatus_id,@user.competence.nstatus_id).map { |s| [s.name, s.id] }
+    else
+      redirect_to :action => "index"
+      flash[:notice] = ["You need to login first."]
+    end
   end
 
   # POST /cagos

@@ -3,6 +3,8 @@
 <table>
   <tr>
     <th>Name</th>
+    <th>Ostatus</th>
+    <th>Nstatus</th>
     <th></th>
     <th></th>
     <th></th>
@@ -11,6 +13,8 @@
 <% @competences.each do |competence| %>
   <tr>
     <td><%= competence.name %></td>
+    <td><%= competence.ostatus.name %></td>
+    <td><%= competence.nstatus.name %></td>
     <td><%= link_to 'Show', competence %></td>
     <td><%= link_to 'Edit', edit_competence_path(competence) %></td>
     <td><%= link_to 'Destroy', competence, method: :delete, data: { confirm: 'Are you sure?' } %></td>

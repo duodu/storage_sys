@@ -5,6 +5,16 @@
   <%= @competence.name %>
 </p>
 
+<p>
+  <b>Ostatus:</b>
+  <%= @competence.ostatus.name %>
+</p>
+
+<p>
+  <b>Nstatus:</b>
+  <%= @competence.nstatus.name %>
+</p>
+
 
 <%= link_to 'Edit', edit_competence_path(@competence) %> |
 <%= link_to 'Back', competences_path %>

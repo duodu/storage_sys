@@ -2,6 +2,10 @@
 
 one:
   name: MyString
+  ostatus_id: 1
+  nstatus_id: 1
 
 two:
   name: MyString
+  ostatus_id: 1
+  nstatus_id: 1

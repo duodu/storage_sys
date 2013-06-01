@@ -15,6 +15,14 @@
     <%= f.label :name %><br />
     <%= f.text_field :name %>
   </div>
+  <div class="field">
+    <%= f.label :ostatus_id %><br />
+    <%= f.select :ostatus_id, options_for_select(@status_array) %>
+  </div>
+  <div class="field">
+    <%= f.label :nstatus_id %><br />
+    <%= f.select :nstatus_id, options_for_select(@status_array) %>
+  </div>
   <div class="actions">
     <%= f.submit %>
   </div>

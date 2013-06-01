@@ -83,4 +83,25 @@ class UsersController < ApplicationController
       format.json { head :no_content }
     end
   end
+  #登录
+  def login
+    uname=params[:name]
+    upass=params[:password]
+    user=User.find_by_name_and_password(uname,upass)
+    reset_session
+    if user
+      session[:user_id]=user.id
+      @user=User.find(user.id)
+      flash[:notice] = ["Successfully login"]
+      redirect_to :controller => "cagos", :action => "index"
+    else
+      redirect_to :controller => "cagos", :action => "index"
+      flash[:notice] = ["login failed"]
+    end
+  end
+  #注销用户
+  def logout
+    reset_session
+    redirect_to :controller => "cagos", :action => "index"
+  end
 end

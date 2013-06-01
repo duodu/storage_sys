@@ -1,3 +1,23 @@
+<% if flash[:notice] %>
+  <div style="color: red">
+  	<% flash[:notice].each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+  </div>
+<% end %>
+<% if @user == nil then %>
+	<%= form_tag :controller=>"users", :action=>"login" do %>
+		<%= label_tag "name" %>
+		<%= text_field_tag :name %>
+		<%= label_tag "password" %>
+		<%= password_field_tag :password %>
+		<%= submit_tag "login" %>
+	<% end %>
+<% else %>
+	<b>Welcome:</b>
+	<%= @user.name %>
+	<%= link_to "logout", :controller => "users", :action => "logout"%>
+<% end %>
 <h1>Listing cagos</h1>
 
 <table>
