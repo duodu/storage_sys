@@ -71,13 +71,5 @@ class StatusesController < ApplicationController
 
   # DELETE /statuses/1
   # DELETE /statuses/1.json
-  def destroy
-    @status = Status.find(params[:id])
-    @status.destroy
 
-    respond_to do |format|
-      format.html { redirect_to statuses_url }
-      format.json { head :no_content }
-    end
-  end
 end

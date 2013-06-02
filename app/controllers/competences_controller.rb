@@ -28,7 +28,7 @@ class CompetencesController < ApplicationController
   # GET /competences/new.json
   def new
     @competence = Competence.new
-    @status_array = Status.all.map { |s| [s.name, s.id] }
+    @status_array = Status.all.map { |s| [s.name, s.id] }-[["NULL",1],["NOT NULL",2]]
 
     respond_to do |format|
       format.html # new.html.erb
@@ -39,14 +39,14 @@ class CompetencesController < ApplicationController
   # GET /competences/1/edit
   def edit
     @competence = Competence.find(params[:id])
-    @status_array = Status.all.map { |s| [s.name, s.id] }
+    @status_array = Status.all.map { |s| [s.name, s.id] }-[["NULL",1],["NOT NULL",2]]
   end
 
   # POST /competences
   # POST /competences.json
   def create
     @competence = Competence.new(params[:competence])
-    @status_array = Status.all.map { |s| [s.name, s.id] }
+    @status_array = Status.all.map { |s| [s.name, s.id] }-[["NULL",1],["NOT NULL",2]]
     if @competence.ostatus_id == @competence.nstatus_id
       @competence.errors.add :name, "can not have same status."
     end
@@ -81,13 +81,5 @@ class CompetencesController < ApplicationController
 
   # DELETE /competences/1
   # DELETE /competences/1.json
-  def destroy
-    @competence = Competence.find(params[:id])
-    @competence.destroy
 
-    respond_to do |format|
-      format.html { redirect_to competences_url }
-      format.json { head :no_content }
-    end
-  end
 end

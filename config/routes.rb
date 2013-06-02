@@ -1,6 +1,7 @@
 StorageSys::Application.routes.draw do
   match "users/login" => "users#login"
   match "users/logout" => "users#logout"
+  root :to => "cagos#index"
   resources :competences
   resources :users
   resources :statuses

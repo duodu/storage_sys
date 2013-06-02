@@ -7,7 +7,6 @@
     <th>Nstatus</th>
     <th></th>
     <th></th>
-    <th></th>
   </tr>
 
 <% @competences.each do |competence| %>
@@ -17,7 +16,6 @@
     <td><%= competence.nstatus.name %></td>
     <td><%= link_to 'Show', competence %></td>
     <td><%= link_to 'Edit', edit_competence_path(competence) %></td>
-    <td><%= link_to 'Destroy', competence, method: :delete, data: { confirm: 'Are you sure?' } %></td>
   </tr>
 <% end %>
 </table>
@@ -25,3 +23,4 @@
 <br />
 
 <%= link_to 'New Competence', new_competence_path %>
+<%= link_to 'Cagos list', cagos_path %>
