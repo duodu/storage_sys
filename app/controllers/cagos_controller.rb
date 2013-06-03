@@ -2,7 +2,7 @@ class CagosController < ApplicationController
   # GET /cagos
   # GET /cagos.json
   def index
-    if Status.all.last.id != 4
+    if Status.all.last.id < 4
       redirect_to new_status_path
       flash[:notice] = ["You need to add some statuses."]
     elsif Competence.all.last.id == 2
