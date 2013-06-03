@@ -20,7 +20,7 @@ class CagosController < ApplicationController
     else
        if session[:user_id]
         @user = User.find(session[:user_id])
-        if @user.competence_id ==2 
+        if @user.competence_id ==2 or @user.competence_id ==1
           @cagos = Cago.all
         else
           @cagos = Cago.where("status_id=?",@user.competence.ostatus_id)
