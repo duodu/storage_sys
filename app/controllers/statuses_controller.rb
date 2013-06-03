@@ -2,7 +2,7 @@ class StatusesController < ApplicationController
   # GET /statuses
   # GET /statuses.json
   def index
-    @statuses = Status.all
+    @statuses = Status.where("id>?",2)
 
     respond_to do |format|
       format.html # index.html.erb
@@ -34,7 +34,10 @@ class StatusesController < ApplicationController
 
   # GET /statuses/1/edit
   def edit
-    @status = Status.find(params[:id])
+     @status = Status.find(params[:id])
+     if @status.id == 1 or @status.id == 2
+       redirect_to :action => "index"
+     end
   end
 
   # POST /statuses
@@ -57,16 +60,21 @@ class StatusesController < ApplicationController
   # PUT /statuses/1.json
   def update
     @status = Status.find(params[:id])
-
-    respond_to do |format|
-      if @status.update_attributes(params[:status])
-        format.html { redirect_to @status, notice: 'Status was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: "edit" }
-        format.json { render json: @status.errors, status: :unprocessable_entity }
+  
+    if @status.id == 1 or @status.id == 2
+      redirect_to :action => "index"
+    else
+      respond_to do |format|
+        if @status.update_attributes(params[:status])
+          format.html { redirect_to @status, notice: 'Status was successfully updated.' }
+          format.json { head :no_content }
+        else
+          format.html { render action: "edit" }
+          format.json { render json: @status.errors, status: :unprocessable_entity }
+        end
       end
     end
+
   end
 
   # DELETE /statuses/1
