@@ -102,6 +102,7 @@ class CagosController < ApplicationController
             format.html { redirect_to @cago, notice: 'Cago was successfully created.' }
             format.json { render json: @cago, status: :created, location: @cago }
           else
+            @status_array = Status.all.map { |s| [s.name, s.id] }-[["NULL",1],["NOT NULL",2]]
             format.html { render action: "new" }
             format.json { render json: @cago.errors, status: :unprocessable_entity }
           end
@@ -129,6 +130,7 @@ class CagosController < ApplicationController
             format.html { redirect_to @cago, notice: 'Cago was successfully updated.' }
             format.json { head :no_content }
           else
+            @status_array = Status.where("id=? or id=?",@user.competence.ostatus_id,@user.competence.nstatus_id).map { |s| [s.name, s.id] }-[["NULL",1],["NOT NULL",2]]
             format.html { render action: "edit" }
             format.json { render json: @cago.errors, status: :unprocessable_entity }
           end

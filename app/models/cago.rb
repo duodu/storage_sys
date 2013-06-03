@@ -3,4 +3,5 @@ class Cago < ActiveRecord::Base
   belongs_to :status
   belongs_to :history
   validates :name, :status_id, :presence => true
+  validates :name, :uniqueness => true
 end
